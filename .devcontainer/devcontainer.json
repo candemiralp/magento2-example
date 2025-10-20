@@ -3,6 +3,6 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "forwardPorts": [8080],
-  "postCreateCommand": "apache2-foreground"
+  "forwardPorts": [80],
+  // "postCreateCommand": "apache2-foreground"
 }
