@@ -23,9 +23,9 @@ RUN docker-php-ext-install -j$(nproc) bcmath gd intl pdo_mysql simplexml soap so
 
 WORKDIR /var/www/html
 
-ADD "https://artifacts.opensearch.org/releases/bundle/opensearch/2.11.1/opensearch-2.11.1-linux-x64.deb" /var/www/html
-RUN dpkg -i opensearch-2.11.1-linux-x64.deb
-RUN rm opensearch-2.11.1-linux-x64.deb
+#ADD "https://artifacts.opensearch.org/releases/bundle/opensearch/2.11.1/opensearch-2.11.1-linux-x64.deb" /var/www/html
+#RUN dpkg -i opensearch-2.11.1-linux-x64.deb
+#RUN rm opensearch-2.11.1-linux-x64.deb
 
 EXPOSE 80
 
