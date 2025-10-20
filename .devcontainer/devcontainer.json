@@ -4,5 +4,5 @@
     "dockerfile": "Dockerfile"
   },
   "forwardPorts": [8080],
-  "postCreateCommand": "exec apache2-foreground"
+  // "postCreateCommand": "exec apache2-foreground"
 }
