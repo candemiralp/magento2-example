@@ -4,5 +4,6 @@
     "dockerfile": "Dockerfile"
   },
   "forwardPorts": [80],
-  // "postCreateCommand": "apache2-foreground"
+  "postCreateCommand": "chmod +x .devcontainer/init.sh",
+  "postAttachCommand": ".devcontainer/init.sh"
 }
