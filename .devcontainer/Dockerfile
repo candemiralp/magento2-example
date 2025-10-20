@@ -14,14 +14,18 @@ RUN apt-get update \
           wget \
           cron \
           unzip \
-          mariadb-server
+          mariadb-server \
+          gnupg \
+          curl
 
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install -j$(nproc) bcmath gd intl pdo_mysql simplexml soap sockets xsl zip ftp
-RUN a2enmod ssl
-RUN a2ensite default-ssl.conf
 
 WORKDIR /var/www/html
+
+ADD "https://artifacts.opensearch.org/releases/bundle/opensearch/2.11.1/opensearch-2.11.1-linux-x64.deb" /var/www/html
+RUN dpkg -i opensearch-2.11.1-linux-x64.deb
+RUN rm opensearch-2.11.1-linux-x64.deb
 
 EXPOSE 80
 
