@@ -3,14 +3,6 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "forwardPorts": [80],
-  "postCreateCommand": "sudo service php8.2-fpm start",
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "felixfbecker.php-debug",
-        "xdebug.php-pack"
-      ]
-    }
-  }
+  "forwardPorts": [8080],
+  "postCreateCommand": "exec apache2-foreground"
 }
