@@ -12,16 +12,11 @@ mariadb -e "
   GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';
   FLUSH PRIVILEGES;"
 
-mv /tmp/magento.tar.gz /var/www/html
-mv /tmp/sample-data.tar.gz /var/www
-
-mkdir ../sample-data
-tar -xf ../sample-data.tar.gz --strip-components 1 -C ../sample-data
-rm ../sample-data.tar.gz
-php -f ../sample-data/dev/tools/build-sample-data.php -- --ce-source="/var/www/html"
-bin/magento setup:upgrade
+cd /var/www/html
 
 tar -xf magento.tar.gz --strip-components 1
 rm magento.tar.gz
+
+composer install -n
 
 exec apache2-foreground
