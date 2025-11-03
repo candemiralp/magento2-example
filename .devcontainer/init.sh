@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# service mariadb restart
+service mariadb restart
 
 DB_NAME="magento"
 DB_USER="magento"

@@ -17,7 +17,20 @@ RUN apt-get update \
           mariadb-server \
           gnupg \
           apache2 \
-          curl
+          curl \
+          ca-certificates \
+          apt-transport-https \
+          software-properties-common  \
+          lsb-release \
+          nano
+
+RUN curl -sSL https://packages.sury.org/php/README.txt | bash -x
+RUN apt-get update \
+    && apt-get install php8.3-fpm \
+          libapache2-mod-fcgid
+RUN a2enmod proxy_fcgi setenvif
+RUN a2enconf php8.3-fpm
+run systemctl restart apache2
 
 WORKDIR /var/www/html
 
