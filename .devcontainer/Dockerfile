@@ -1,5 +1,18 @@
 FROM debian:bookworm
 
+ENV MAGENTO_HOST=$CODESPACE_NAME \
+    DB_PORT=3306 \
+    DB_NAME="magento" \
+    DB_USER="magento" \
+    DB_PASS="magento" \
+    DB_PREFIX="m2_" \
+    ADMIN_NAME="Admin" \
+    ADMIN_LASTNAME="Admin" \
+    ADMIN_EMAIL="admin@demo.com" \
+    ADMIN_USERNAME="admin" \
+    ADMIN_PASSWORD="Admin123@" \
+    ADMIN_URLEXT="admin"
+
 RUN apt-get update \
     && apt-get install -y \
           libjpeg62-turbo-dev \
