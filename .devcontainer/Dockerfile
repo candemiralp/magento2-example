@@ -43,7 +43,6 @@ RUN apt-get update \
           libapache2-mod-fcgid
 RUN a2enmod proxy_fcgi setenvif
 RUN a2enconf php8.3-fpm
-run systemctl restart apache2
 
 WORKDIR /var/www/html
 
