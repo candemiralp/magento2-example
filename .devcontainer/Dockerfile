@@ -21,10 +21,10 @@ RUN apt-get update \
 
 WORKDIR /var/www/html
 
-ADD "https://artifacts.opensearch.org/releases/bundle/opensearch/2.11.1/opensearch-2.11.1-linux-arm64.deb" /var/www/html
+ADD "https://artifacts.opensearch.org/releases/bundle/opensearch/2.11.1/opensearch-2.11.1-linux-x64.deb" /var/www/html
 ADD "https://github.com/magento/magento2/archive/refs/tags/2.4.8-p3.tar.gz" /var/www/html
-RUN dpkg -i opensearch-2.11.1-linux-arm64.deb
-RUN rm opensearch-2.11.1-linux-arm64.deb
+RUN dpkg -i opensearch-2.11.1-linux-x64.deb
+RUN rm opensearch-2.11.1-linux-x64.deb
 
 EXPOSE 80
 
