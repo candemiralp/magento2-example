@@ -1,6 +1,6 @@
 #!/bin/bash
 
-service mariadb restart
+# service mariadb restart
 
 DB_NAME="magento"
 DB_USER="magento"
@@ -23,11 +23,11 @@ fi
 
 cd /var/www/html
 
-wget https://github.com/magento/magento2/archive/refs/tags/2.4.8-p3.tar.gz
+# wget https://github.com/magento/magento2/archive/refs/tags/2.4.8-p3.tar.gz
 
 tar -xf 2.4.8-p3.tar.gz --strip-components 1
 rm 2.4.8-p3.tar.gz
 
 composer install -n
 
-exec apache2-foreground
+# exec apache2-foreground

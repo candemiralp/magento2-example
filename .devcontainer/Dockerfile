@@ -1,4 +1,4 @@
-FROM php:8.3-apache
+FROM debian:bookworm
 
 RUN apt-get update \
     && apt-get install -y \
@@ -16,17 +16,16 @@ RUN apt-get update \
           unzip \
           mariadb-server \
           gnupg \
+          apache2 \
           curl
-
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
-RUN docker-php-ext-install -j$(nproc) bcmath gd intl pdo_mysql simplexml soap sockets xsl zip ftp
 
 WORKDIR /var/www/html
 
-#ADD "https://artifacts.opensearch.org/releases/bundle/opensearch/2.11.1/opensearch-2.11.1-linux-x64.deb" /var/www/html
-#RUN dpkg -i opensearch-2.11.1-linux-x64.deb
-#RUN rm opensearch-2.11.1-linux-x64.deb
+ADD "https://artifacts.opensearch.org/releases/bundle/opensearch/2.11.1/opensearch-2.11.1-linux-arm64.deb" /var/www/html
+ADD "https://github.com/magento/magento2/archive/refs/tags/2.4.8-p3.tar.gz" /var/www/html
+RUN dpkg -i opensearch-2.11.1-linux-arm64.deb
+RUN rm opensearch-2.11.1-linux-arm64.deb
 
 EXPOSE 80
 
-CMD exec apache2-foreground
+CMD apachectl -D FOREGROUND
