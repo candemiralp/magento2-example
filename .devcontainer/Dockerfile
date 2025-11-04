@@ -46,10 +46,11 @@ ENV MAGENTO_HOST=$CODESPACE_NAME \
 
 RUN groupadd -g 1005 opensearch && useradd -m -u 1005 -g opensearch opensearch
 ADD "https://artifacts.opensearch.org/releases/bundle/opensearch/2.11.1/opensearch-2.11.1-linux-x64.tar.gz" /home/opensearch
-RUN tar -xvf /home/opensearch/opensearch-2.11.1-linux-x64.tar.gz
-RUN chown -R opensearch:opensearch /home/opensearch
+WORKDIR /home/opensearch
+RUN tar -xvf opensearch-2.11.1-linux-x64.tar.gz
+RUN chown -R opensearch:opensearch .
 USER opensearch
-CMD ["bash", "/home/opensearch/opensearch-2.11.1/opensearch-tar-install.sh"]
+RUN opensearch-2.11.1/opensearch-tar-install.sh
 
 #USER root
 #ADD "https://github.com/magento/magento2/archive/refs/tags/2.4.8-p3.tar.gz" /var/www/html
@@ -57,3 +58,4 @@ CMD ["bash", "/home/opensearch/opensearch-2.11.1/opensearch-tar-install.sh"]
 #EXPOSE 80
 #
 #CMD apachectl -D FOREGROUND
+CMD ["/bin/sh", "-c", "bash"]
