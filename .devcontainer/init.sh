@@ -21,6 +21,8 @@ while [ $RET -ne 0 ]; do
 done
 echo "OpenSearch server is available."
 
+cd /var/www/html
+
 composer install -n
 
 find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
