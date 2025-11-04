@@ -3,6 +3,8 @@
 service mariadb restart
 service apache2 restart
 
+MAGENTO_HOST="${CODESPACE_NAME}-80.app.github.dev"
+
 mariadb -e "
   CREATE DATABASE $DB_NAME CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
   CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS';
@@ -32,10 +34,10 @@ chmod u+x bin/magento
 
 bin/magento setup:install \
   --base-url="http://$MAGENTO_HOST" \
-  --db-host="$DB_SERVER:$DB_PORT" \
+  --db-host="localhost:$DB_PORT" \
   --db-name="$DB_NAME" \
   --db-user="$DB_USER" \
-  --db-password="$DB_PASSWORD" \
+  --db-password="$DB_PASS" \
   --db-prefix="$DB_PREFIX" \
   --admin-firstname="$ADMIN_NAME" \
   --admin-lastname="$ADMIN_LASTNAME" \

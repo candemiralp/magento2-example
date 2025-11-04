@@ -3,8 +3,7 @@ FROM debian:bookworm
 ARG PHP_VERSION=8.3
 ARG MAGENTO_VERSION=2.4.8-p3
 
-ENV MAGENTO_HOST=$CODESPACE_NAME \
-    DB_PORT=3306 \
+ENV DB_PORT=3306 \
     DB_NAME="magento" \
     DB_USER="magento" \
     DB_PASS="magento" \
@@ -17,6 +16,11 @@ ENV MAGENTO_HOST=$CODESPACE_NAME \
     ADMIN_URLEXT="admin"
 
 RUN apt-get update \
+    && apt-get install -y software-properties-common \
+    && apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc' \
+    && add-apt-repository 'deb [arch=amd64] https://mirror.mariadb.org/repo/11.4/debian bookworm main'
+
+RUN apt-get update \
     && apt-get install -y \
         libjpeg62-turbo-dev \
         libpng-dev \
@@ -26,24 +30,24 @@ RUN apt-get update \
         libssl-dev \
         libxslt-dev \
         libicu-dev \
+        libapache2-mod-fcgid \
+        apache2 \
+        mariadb-server \
+        mariadb-client \
         ssl-cert \
         wget \
         cron \
         unzip \
-        mariadb-server \
         gnupg \
-        apache2 \
         curl \
         ca-certificates \
         apt-transport-https \
-        software-properties-common  \
         lsb-release \
         nano
 
 RUN curl -sSL https://packages.sury.org/php/README.txt | bash -x
 RUN apt-get update \
     && apt-get install -y php${PHP_VERSION}-fpm \
-        libapache2-mod-fcgid \
         php${PHP_VERSION}-bcmath \
         php${PHP_VERSION}-common \
         php${PHP_VERSION}-curl \
