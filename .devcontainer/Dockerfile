@@ -46,7 +46,7 @@ ENV MAGENTO_HOST=$CODESPACE_NAME \
 
 RUN useradd opensearch && mkdir /home/opensearch
 USER opensearch
-ADD "https://artifacts.opensearch.org/releases/bundle/opensearch/2.19.3/opensearch-2.11.1-linux-x64.tar.gz" /home/opensearch
+ADD "https://artifacts.opensearch.org/releases/bundle/opensearch/2.11.1/opensearch-2.11.1-linux-x64.tar.gz" /home/opensearch
 RUN tar -xvf /home/opensearch/opensearch-2.11.1-linux-x64.tar.gz
 RUN /bin/bash /home/opensearch/opensearch-2.11.1/opensearch-tar-install.sh
 
