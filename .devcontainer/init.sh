@@ -25,26 +25,24 @@ cd /var/www/html
 tar -xf 2.4.8-p3.tar.gz --strip-components 1
 rm 2.4.8-p3.tar.gz
 
-if [ "$OPENSEARCH_SERVER" != "<will be defined>" ]; then
-	MAGENTO_INSTALL_ARGS=$(echo \
+MAGENTO_INSTALL_ARGS=$(echo \
 	    --search-engine="opensearch" \
-		--opensearch-host="$OPENSEARCH_SERVER" \
-		--opensearch-port="$OPENSEARCH_PORT" \
-		--opensearch-index-prefix="$OPENSEARCH_INDEX_PREFIX" \
-		--opensearch-timeout="$OPENSEARCH_TIMEOUT")
+		--opensearch-host="localhost" \
+		--opensearch-port="9200" \
+		--opensearch-index-prefix="magento2" \
+		--opensearch-timeout="15")
 	RET=1
-	while [ $RET -ne 0 ]; do
-		echo "Checking if $OPENSEARCH_SERVER is available."
-		curl -XGET "$OPENSEARCH_SERVER:$OPENSEARCH_PORT/_cat/health?v&pretty" >/dev/null 2>&1
-		RET=$?
+while [ $RET -ne 0 ]; do
+  echo "Checking if Opensearch is available."
+  curl -XGET "localhost:9200/_cat/health?v&pretty" >/dev/null 2>&1
+  RET=$?
 
-		if [ $RET -ne 0 ]; then
-			echo "Connection to OpenSearch is pending."
-			sleep 5
-		fi
-	done
-	echo "OpenSearch server $OPENSEARCH_SERVER is available."
-fi
+  if [ $RET -ne 0 ]; then
+    echo "Connection to OpenSearch is pending."
+    sleep 5
+  fi
+done
+echo "OpenSearch server is available."
 
 composer install -n
 
