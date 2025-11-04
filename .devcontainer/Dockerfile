@@ -50,6 +50,7 @@ WORKDIR /home/opensearch
 RUN tar -xvf opensearch-2.11.1-linux-x64.tar.gz
 RUN chown -R opensearch:opensearch .
 USER opensearch
+RUN sed -i '/exec \$OPENSEARCH_HOME\/bin\/opensearch "\$@"/d' opensearch-2.11.1/opensearch-tar-install.sh
 RUN opensearch-2.11.1/opensearch-tar-install.sh
 
 #USER root
